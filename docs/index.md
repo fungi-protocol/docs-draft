@@ -11,6 +11,7 @@ okf_version: "0.2"
 # Privacy Optimization Strategy
 
 * [Cost function framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
+* [Concrete cost function](cost_function_concrete.md) - The concrete terms of the cost function, and a procedure for constructing the decision tree it evaluates.
 
 # BIP Drafts
 

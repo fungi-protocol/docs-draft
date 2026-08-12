@@ -1,6 +1,7 @@
 # Bitcoin and privacy vocabulary
 blockspace
 CoinJoin
+coindays
 deanonymization
 deanonymize
 CLTV
@@ -13,9 +14,13 @@ HTLCs
 keytype
 locktime
 Merkle
+Karrer
 MuSig
 Payjoin
 permissionless
+precomputation
+sumset
+superconcentrator
 preimages
 PSBT
 PSBTs
