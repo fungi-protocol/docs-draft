@@ -7,6 +7,7 @@ dontInstall
 dylanowen
 fontconfig
 Graphviz
+ipynb
 KaTeX
 lzanini
 mdBook
