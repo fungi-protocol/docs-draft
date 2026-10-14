@@ -1,7 +1,9 @@
 # Author names
 Alpern
+Dolev
 Dwork
 Elkind
+Garay
 Keidar
 Kleppmann
 Kogias
@@ -10,5 +12,7 @@ Kokoris
 Naor
 Paverd
 Poupko
+Skoumios
 Stockmeyer
 Wuille
+Zikas

@@ -13,6 +13,7 @@ okf_version: "0.2"
 * [🤖 Contacts, devices and discovery](contacts.md) - Introduction, TOFU, trust policy, revocation, application interoperability across transports, contact channels and payment negotiation.
 * [Market-based coalition formation](coalition_formation.md) - Under review in #18.
 * [🤖 Transaction construction](transaction-construction.md) - Content and state synchronization, the phases, the optimistic and recovery tracks, and the block DAG they share.
+  * [🤖 Optimistic track: blocks and phase states](optimistic-track.md) - Unanimity and phase closure on the optimistic track, phase by phase.
 
 # Privacy Optimization Strategy
 
