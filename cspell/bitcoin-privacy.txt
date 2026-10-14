@@ -36,5 +36,7 @@ unlinkable
 UTXO
 xpub
 blocklace
+ECMH
+multiset
 RIBLT
 contramap
