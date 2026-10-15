@@ -8,6 +8,7 @@ okf_version: "0.2"
 
 * [Overview](overview.md) - Collaborative transaction construction, privacy, fault tolerance and coalition formation.
 * [🤖 Abstract transport interfaces](transport-interfaces.md) - Send and receive channels, privacy tags, and message unlinkable broadcast by gossip.
+* [🤖 Peer and broadcast channels](channels.md) - Generic message interfaces, transport interactivity, privacy profiles and anonymous replies.
 * [Market-based coalition formation](coalition_formation.md) - Under review in #18.
 
 # Privacy Optimization Strategy
