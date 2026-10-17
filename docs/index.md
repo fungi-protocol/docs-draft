@@ -15,6 +15,7 @@ okf_version: "0.2"
 * [🤖 Transaction construction](transaction-construction.md) - Content and state synchronization, the phases, the optimistic and recovery tracks, and the block DAG they share.
   * [🤖 Optimistic track: blocks and phase states](optimistic-track.md) - Unanimity and phase closure on the optimistic track, phase by phase.
   * [🤖 Recovery track](recovery-track.md) - How a stalled phase of the optimistic track turns into a recovery coalition formation proposal. Draft.
+  * [🤖 Validity proofs](validity-proofs.md) - Candidate design: proving outputs are covered by inputs through anonymous allocation registration.
 
 # Privacy Optimization Strategy
 
