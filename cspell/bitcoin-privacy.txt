@@ -1,7 +1,6 @@
 # Bitcoin and privacy vocabulary
 blockspace
 CoinJoin
-coindays
 deanonymization
 deanonymize
 CLTV
@@ -14,13 +13,9 @@ HTLCs
 keytype
 locktime
 Merkle
-Karrer
 MuSig
 Payjoin
 permissionless
-precomputation
-sumset
-superconcentrator
 preimages
 PSBT
 PSBTs
@@ -33,3 +28,29 @@ taptree
 unlinkability
 UTXO
 xpub
+backout
+feerates
+locktimes
+# Cited journals
+Academiae
+Scientiarum
+Hungaricae
+# Network science
+assortativity
+deanonymizes
+multiroute
+superconcentrator
+# Cited authors
+Chekuri
+Idleman
+Karrer
+Kishimoto
+Maurer
+Neudecker
+Orlin
+multiset
+satisfice
+satisficing
+sumset
+coindays
+precomputation
