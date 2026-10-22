@@ -11,6 +11,7 @@ okf_version: "0.2"
 # Privacy Optimization Strategy
 
 * [Cost function framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
+* [Radix CoinJoin Denominations](Denominations_and_gap_size_distributions.ipynb) - Why small Hamming weight denominations suit CoinJoin outputs, and how closely sums of a few of them approximate arbitrary amounts.
 
 # BIP Drafts
 
