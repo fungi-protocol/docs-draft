@@ -7,6 +7,7 @@ okf_version: "0.2"
 # Protocol Suite
 
 * [Overview](overview.md) - Collaborative transaction construction, privacy, fault tolerance and coalition formation.
+* [🤖 Abstract transport interfaces](transport-interfaces.md) - Send and receive channels, privacy tags, and message unlinkable broadcast by gossip.
 * [Market-based coalition formation](coalition_formation.md) - Under review in #18.
 
 # Privacy Optimization Strategy
