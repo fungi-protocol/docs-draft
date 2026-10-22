@@ -13,6 +13,7 @@ HTLCs
 keytype
 locktime
 Merkle
+multiset
 MuSig
 Payjoin
 permissionless
@@ -21,9 +22,12 @@ PSBT
 PSBTs
 pubkeys
 RIPEMD
+satisfice
+satisficing
 scriptSig
 scriptWitness
 sighash
+sumset
 taptree
 unlinkability
 UTXO
