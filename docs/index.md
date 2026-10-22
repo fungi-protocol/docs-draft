@@ -16,6 +16,7 @@ okf_version: "0.2"
   * [🤖 Optimistic track: blocks and phase states](optimistic-track.md) - Unanimity and phase closure on the optimistic track, phase by phase.
   * [🤖 Recovery track](recovery-track.md) - How a stalled phase of the optimistic track turns into a recovery coalition formation proposal. Draft.
   * [🤖 Validity proofs](validity-proofs.md) - Candidate design: proving outputs are covered by inputs through anonymous allocation registration.
+* [🤖 Protocol messages](protocol-messages.md) - The messages peers exchange, who sends them, when, and what each requires of its channel.
 
 # Privacy Optimization Strategy
 

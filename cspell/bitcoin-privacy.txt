@@ -37,7 +37,9 @@ UTXO
 xpub
 blocklace
 ECMH
+fastcrypto
 multiset
+prevout
 RIBLT
 vout
 contramap
