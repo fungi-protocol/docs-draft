@@ -28,3 +28,9 @@ taptree
 unlinkability
 UTXO
 xpub
+# Cited journals
+Academiae
+Scientiarum
+Hungaricae
+# Network science
+assortativity
