@@ -14,7 +14,7 @@ A privacy liability term of the [cost function](optimization_framework.md). Spen
 - $I$: the own inputs of the transaction under consideration.
 - For each earlier transaction $T$, $j_T$ is the number of its outputs in $I$.
 - **Liability.** $\ell_s = \sigma \sum_T \max(0, j_T - 1)$, with $\sigma$ large.
-- Neither the labels from the *Max flow based counterfactual path estimation* chapter nor [subset sum density](subset_sum_density.md) reduce it. Amounts can explain the values, but not two users spending outputs of one transaction together.
+- Neither the labels from the [Max flow based counterfactual path estimation](cost_function_counterfactual_paths.md) chapter nor [subset sum density](subset_sum_density.md) reduce it. Amounts can explain the values, but not two users spending outputs of one transaction together.
 
 ## In the decision tree
 

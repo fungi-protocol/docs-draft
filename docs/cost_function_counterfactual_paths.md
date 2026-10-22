@@ -70,7 +70,7 @@ For each own coin $c$:
 - **Origins.** $O(c)$ is the set of coins by which the wallet received the funds $c$ descends from.
 - **Routes.** $k_c = \min_{o \in O(c)} k(o, \{c\})$, with the wallet's own edges set to 0.
 - **Label.** $\iota(c) \in [0, 1]$ rises with $k_c$ and reaches 1 at $K$, the number of routes at which a coin counts as impervious to intersections. For example, $\iota(c) = \min(1, k_c / K)$.
-- **Use.** $\iota$ is the label the consolidation term, in the *Consolidation* chapter, takes as given. At $\iota(c) = 1$, $c$ adds nothing to that term's linked count $\nu$.
+- **Use.** $\iota$ is the label the consolidation term, in the [Consolidation penalty](cost_function_consolidation.md) chapter, takes as given. At $\iota(c) = 1$, $c$ adds nothing to that term's linked count $\nu$.
 
 Everything $k_c$ depends on exists once $c$ confirms: the coins between its origins and $c$, the other coins in their transactions, and their link probabilities. So $k_c$ is fixed from then on, and labels are cached per coin.
 
@@ -103,7 +103,7 @@ Spending own coins $I$ together links them. An intersection attack then intersec
 - **Order book coins.** The own inputs' coin edges are set to 0, so routes from their origins into the transaction's own outputs enter only through other users' inputs.
   - An order book coin that descends from those origins adds routes, so selecting it is valuable.
   - A co-spend proposal from an own input that names such a coin links the two, unless such proposals are already common. An outcome may still prefer the selection, but the cost function should penalize proposals that leak the link this way.
-- **Bounds.** Leaves use $\iota$ from $k^-$. Tightening $k^-$, with more walks or an exact $k$ on a pruned graph, can run between iterations of the decision loop in the *Mixed strategy* chapter. It can only raise $\iota$.
+- **Bounds.** Leaves use $\iota$ from $k^-$. Tightening $k^-$, with more walks or an exact $k$ on a pruned graph, can run between iterations of the decision loop in the [Mixed strategy](mixed_strategy.md) chapter. It can only raise $\iota$.
 - **Score.** The routes factor attenuates the consolidation penalty. See [Consolidation](#consolidation).
 - **Strategy.** Building the routes compels a strategy:
   1. While the subset sums on the inputs are dense, CoinJoin with low fan-in.
@@ -158,7 +158,7 @@ The approximation estimates each layer of the network separately. Each layer dep
 
 - Sample blocks, and estimate each layer's distributions from their transactions, separately.
   - For the topology: the numbers of inputs and outputs per transaction, and the spend rate $p$, the fraction of unspent coins spent per block.
-- Base the estimate on randomized selection, as in the *Randomized selection and Sybil resistance* chapter. When coins are selected at random from the candidates, the transaction graph can be treated as a random acyclic network with those degree distributions.[^karrer-newman-acyclic][^karrer-newman-models]
+- Base the estimate on randomized selection, as in the [Randomized selection and Sybil resistance](cost_function_randomized_selection.md) chapter. When coins are selected at random from the candidates, the transaction graph can be treated as a random acyclic network with those degree distributions.[^karrer-newman-acyclic][^karrer-newman-models]
 - **Number of candidates $N$.** A larger $N$ gives a smaller $k$, so the conservative choice is an upper bound, such as the number of unspent coins.
   - Randomized selection gives a lower bound $L \le N$. Using it in place of $N$ would overstate $k$.
   - In the pool model below, doubling $N$ from 1000 to 2000 lowers $E[k]$ from 1.20 to 0.73 at $n = 4$, $R = 12$.
@@ -219,7 +219,7 @@ Counting only whether the first coins at each end are spent or created in time p
   - The union is a subgraph, so its $k$ is a lower bound.
   - Walks that cross share edges, and the max flow counts a shared edge once. Overlapping paths aren't double counted.
 
-**Randomization.** With randomized selection, as in the *Randomized selection and Sybil resistance* chapter, in the prototype below, this puts the smallest cut next to one of the ends, so $k = k^+$. That isn't guaranteed in general.
+**Randomization.** With randomized selection, as in the [Randomized selection and Sybil resistance](cost_function_randomized_selection.md) chapter, in the prototype below, this puts the smallest cut next to one of the ends, so $k = k^+$. That isn't guaranteed in general.
 
 - The selection bias bounds the number of candidates from below. It doesn't show that both ends draw from the same candidates: two groups that never transact with each other can each select at random.
 - The evidence that the ends are connected is $k^-$ itself, as it approaches $k^+$.
@@ -251,7 +251,7 @@ Counting only whether the first coins at each end are spent or created in time p
 - With several sink coins, should each sink get its own share of $d$?
 - What link probabilities apply to the transaction under construction? They must hold in every completion.
 - Which term penalizes a co-spend proposal that leaks a link to an order book coin that adds routes, and how is "already common" measured?
-- How is the routes factor computed: from each input's $\iota$, as the consolidation term does now, or from the counterfactual superconcentrator condition?
+- How is the routes factor computed: from each input's $\iota$, as the [consolidation term](cost_function_consolidation.md) does now, or from the counterfactual superconcentrator condition?
 - How is the counterfactual superconcentrator condition checked? It ranges over sets of sources and sinks of equal size, while $M$ holds only single pairs.
 - Should a privileged counterparty's own coins also be set to 0, since it knows where they went?
 - Should $\iota$ ramp up to $K$, or switch from 0 to 1 at $K$? What should $K$ be?

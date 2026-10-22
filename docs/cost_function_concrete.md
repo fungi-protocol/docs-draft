@@ -20,13 +20,13 @@ Two weak preferences, defined only on outpoints. $t$ is a block hash, used as a 
 - **Individual:** $x_i$, preferring "lucky" hashes. This is a total order on coins.
 - **Pairwise:** $x_i \oplus x_j$, preferring pairs with a small XOR metric.
 
-Both are summed over the transaction's inputs, through a monotone scaling function. They bias co-spending through market choices. See the *Randomized selection and Sybil resistance* chapter.
+Both are summed over the transaction's inputs, through a monotone scaling function. They bias co-spending through market choices. See the [Randomized selection and Sybil resistance](cost_function_randomized_selection.md) chapter.
 
 ### 🤖 Sybil resistance {#sybil-resistance}
 
 The provenance term estimates the size of the order book at the time of a coin's funding transaction, from that transaction's input set. So it can be seen as a multiplier for the liquidity (coindays) and the transaction cost (fees) of the observed transaction. A discount rate reduces them to one cost. It can be repeated for ancestors, subject to data availability and computational limits.
 
-That's why it's conservative: the cost to the adversary can be reported as a minimum cost and a predicted maximum. The estimate can also be used for degree sequence estimation in the Karrer–Newman model of the *Max flow based counterfactual path estimation* chapter.
+That's why it's conservative: the cost to the adversary can be reported as a minimum cost and a predicted maximum. The estimate can also be used for degree sequence estimation in the Karrer–Newman model of the [Max flow based counterfactual path estimation](cost_function_counterfactual_paths.md) chapter.
 
 The Sybil resistance index $L$ is a lower bound on the number $N$ of candidates, computed from joint sums of spans:
 
@@ -52,7 +52,7 @@ Joint sums are used because the estimate:
 - **is simple to understand how it's monotone:** adding an input splits a gap, so the sums only shrink and $L$ only grows;
 - **has a controllable error:** $P(L \gt N) \le \delta$ for every selection strategy.
 
-See the *Randomized selection and Sybil resistance* chapter for the terms, and the *Sybil resistance index* chapter for the proofs and measurements.
+See the [Randomized selection and Sybil resistance](cost_function_randomized_selection.md) chapter for the terms, and the [Sybil resistance index](sybil_resistance_index.md) chapter for the proofs and measurements.
 
 ### 🤖 Subset sum ambiguity {#subset-sum-ambiguity}
 
@@ -62,7 +62,7 @@ A liability $0 \le \ell(o) \le 1$ for each output $o$ of a proposed decompositio
 - The denser these subset sums, the more explanations, and the lower $\ell(o)$.
 - Counting stops once there are enough explanations, and $\ell(o)$ only falls as inputs and outputs are learned.
 
-See the *Own inputs or outputs subset sum ambiguity* chapter, and the *Others' inputs subset sum density* chapter for how density is estimated and optimized.
+See the [Own inputs or outputs subset sum ambiguity](cost_function_subset_sum_ambiguity.md) chapter, and the [Others' inputs subset sum density](subset_sum_density.md) chapter for how density is estimated and optimized.
 
 ### 🤖 Max flow based counterfactual path estimation {#max-flow-based-counterfactual-path-estimation}
 
@@ -72,7 +72,7 @@ Disjoint flows: the number of counterfactual routes $\lfloor F / d \rfloor$ from
 - Each own coin gets a label $0 \le \iota(c) \le 1$ from the routes from its own origins. At $\iota(c) = 1$ it's impervious to intersection attacks.
 - For coins spent together, the routes matrix, with the routes from each origin to each input, shows what an intersection can reveal.
 
-See the *Max flow based counterfactual path estimation* chapter.
+See the [Max flow based counterfactual path estimation](cost_function_counterfactual_paths.md) chapter.
 
 ### Consolidation
 
@@ -87,7 +87,7 @@ See the *Max flow based counterfactual path estimation* chapter.
 - 🤖 $\ell_c = 0$ once the density reaches its threshold and every input but one is impervious. Density alone isn't enough, because comparing the ancestor sets of pairs of inputs narrows down an intersection attack efficiently, even in a large transaction.
 - So the cost function compels a strategy. First CoinJoin with low fan-in while the subset sums on the inputs are dense. Once the counterfactual routes are built and the funds are well absorbed into the CoinJoin graph, consolidate their descendants, subject to the counterfactual superconcentrator condition: $K$ routes over the other users' edges only, from the earliest ancestor coins to the inputs under consideration.
 
-🤖 See the *Consolidation penalty* chapter.
+🤖 See the [Consolidation penalty](cost_function_consolidation.md) chapter.
 
 ### 🤖 Sibling avoidance {#sibling-avoidance}
 
@@ -96,7 +96,7 @@ Spending outputs of the same transaction together is penalized heavily.
 - $\ell_s = \sigma \sum_T \max(0, j_T - 1)$, where $j_T$ is the number of inputs created by transaction $T$, and $\sigma$ is large.
 - Neither $\iota$ nor density reduces it.
 
-See the *Sibling output penalty* chapter.
+See the [Sibling output penalty](cost_function_siblings.md) chapter.
 
 ### 🤖 UTXO pool diversity {#utxo-pool-diversity}
 

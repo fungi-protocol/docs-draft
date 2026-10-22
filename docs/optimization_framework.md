@@ -52,7 +52,7 @@ Actions include announcements and negotiation, not just the steps of transaction
 - accepting a co-spend proposal, or a coalition formation proposal
 - adding auxiliary inputs and outputs to a committed transaction, and signing it
 
-How the tree is built is part of the strategy, and is described in the *Tactics* chapter.
+How the tree is built is part of the strategy, and is described in the [Tactics](tactics.md) chapter.
 
 How the wallet chooses among the pure strategies in the tree, and when it acts, is described in the [Mixed strategy](mixed_strategy.md) chapter.
 

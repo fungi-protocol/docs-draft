@@ -67,7 +67,7 @@ The term rises with this cost: an inherited "luck" from previously lucky coins, 
 - **Only with the preferences.** The term can only be optimized in the presence of a market preference like the per input and pairwise terms, or no bias would be detectable.
 - **Costless for honest users.** Assuming takers and makers weakly prefer the bias, it's costless, at least on average. With market demand for it, makers can be profitable. This promotes a wider CoinJoin graph, with less temporal assortativity.
 - **Waiting.** The longer a UTXO is unspent, the more chances it has of being lucky.
-- **Intersection attacks.** Randomization promotes a high number of paths between coins, even for bounded degree graphs, as in superconcentrator graphs.[^bhatt] It doesn't guarantee them: it draws from the non-random set of available candidate UTXOs at a point in time. The estimate can also be used for degree sequence estimation in the Karrer–Newman model of the *Counterfactual routes* chapter.
+- **Intersection attacks.** Randomization promotes a high number of paths between coins, even for bounded degree graphs, as in superconcentrator graphs.[^bhatt] It doesn't guarantee them: it draws from the non-random set of available candidate UTXOs at a point in time. The estimate can also be used for degree sequence estimation in the Karrer–Newman model of the [Max flow based counterfactual path estimation](cost_function_counterfactual_paths.md) chapter.
 
 See also Belcher's analysis of fidelity bonds.[^belcher]
 
@@ -116,7 +116,7 @@ This is the analysis that contributes privacy gains, and that uses the budget.
 
 - What should $\delta$ be?
 - How are the minimum cost and the predicted maximum computed from $L$?
-- How far back should the provenance term go, and how should the costs of several ancestors combine? The *Counterfactual routes* chapter walks ancestors too.
+- How far back should the provenance term go, and how should the costs of several ancestors combine? The [Max flow based counterfactual path estimation](cost_function_counterfactual_paths.md) chapter walks ancestors too.
 - Can light clients estimate $L$ for transactions they only sample?
 
 [^belcher]: C. Belcher, [*Financial mathematics of JoinMarket fidelity bonds*](https://gist.github.com/chris-belcher/87ebbcbb639686057a389acb9ab3e25b#cost-of-sybil-attacks).

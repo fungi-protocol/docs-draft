@@ -12,12 +12,12 @@ A privacy liability term of the [cost function](optimization_framework.md). Spen
 - **Why unbounded.** Spending a whole wallet at once, e.g. in a hurry and without regard for privacy, would normally reveal its coins as one user's, and let all of its origin funds be traced. Under the right conditions, even such a transaction, with no other users' coins, can be safe.
 - Density alone isn't enough. Comparing the ancestor sets of pairs of inputs narrows down an intersection efficiently, even in a large transaction.
 
-It's related to the term of the *Max flow based counterfactual path estimation* chapter, which deals with the flows to the coins' ancestry. Its labels attenuate this penalty.
+It's related to the term of the [Max flow based counterfactual path estimation](cost_function_counterfactual_paths.md) chapter, which deals with the flows to the coins' ancestry. Its labels attenuate this penalty.
 
 ## Definition
 
 - $I$: the own inputs of the transaction under consideration, each with a label $\iota(a) \in [0, 1]$, the degree to which $a$ is already impervious to intersections.
-  - The labels come from the *Max flow based counterfactual path estimation* chapter, and are taken as given here.
+  - The labels come from the [Max flow based counterfactual path estimation](cost_function_counterfactual_paths.md) chapter, and are taken as given here.
 - **Links.** $\nu_0 = |I| - 1$.
 - **Linked count.** $\nu = \sum_{a \in I} (1 - \iota(a)) - \max_{a \in I} (1 - \iota(a))$.
   - A single coin gives $\nu = 0$, and so does one coin that isn't impervious spent with ones that are.
