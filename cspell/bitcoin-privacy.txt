@@ -3,6 +3,7 @@ blockspace
 CoinJoin
 deanonymization
 deanonymize
+deanonymizes
 CLTV
 CPFP
 DLEQ
@@ -28,3 +29,13 @@ taptree
 unlinkability
 UTXO
 xpub
+multiroute
+superconcentrator
+# Cited authors
+Chekuri
+Idleman
+Karrer
+Kishimoto
+Maurer
+Neudecker
+Orlin
