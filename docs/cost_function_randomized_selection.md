@@ -9,7 +9,7 @@ stale_after: 2026-11-06T00:00:00Z
 
 <!-- cspell:words coindays msats rivalrous Karrer superconcentrator superconcentrators bhatt Bhatt -->
 
-Three terms of the [cost function](cost_function_abstract.md). Two weak preferences randomize the choice of which UTXOs to co-spend with, using the blockchain as a randomness beacon. The provenance term values coins by how well that randomization can be observed in their history.
+Three terms of the [cost function](optimization_framework.md). Two weak preferences randomize the choice of which UTXOs to co-spend with, using the blockchain as a randomness beacon. The provenance term values coins by how well that randomization can be observed in their history.
 
 Together they:
 
