@@ -112,7 +112,7 @@ Other ad hoc terms, such as fingerprint avoidance, are yet to be specified.
 
 ### In the decision tree
 
-- **Subset sum ambiguity** can only fall as other users' inputs and outputs are learned. This gives the best and worst cases in [step 5 of decision tree construction](decision_tree_construction.md#5-bracket-and-back-up-values).
+- **Subset sum ambiguity** can only fall as other users' inputs and outputs are learned. This gives the best and worst cases in [step 6 of decision tree construction](decision_tree_construction.md#6-bracket-and-back-up-values).
 - **Labels** $\iota$, and the routes matrix entries for confirmed inputs, are fixed once a coin confirms, so they're cached per coin. Nothing other users add changes them.
 - **Siblings and consolidation** are fixed when the inputs are chosen, except that $\ell_c$ can only fall as density rises.
 - **Best cases** of the privacy liabilities are 0, used for pruning.

@@ -19,6 +19,15 @@ Each path must be executable from the current wallet state. Each leaf denotes th
 
 ## Bottom-up construction
 
+The tree is built bottom up, starting with complete outcomes and working back towards the immediate actions that would lead to them:
+
+1. Partition the queue of intents heuristically. Each partition is an outcome: a set of batches to execute.
+2. For each outcome, select coins batch by batch, possibly shuffling. Coin selection may optimize or be fully randomized, and interactive incoming payments can be treated as pseudo-inputs. This ensures that the outcome has a positive surplus and can be executed.
+3. Decompose each surplus into radix denominations, enumerating the possibilities by brute force.
+4. Extend outcomes by selecting coins from the order book.
+
+This generates many independent outcomes, each complete and balanced, each made up of disjoint batches. Typically there will be one greedy batch, or one small batch for a unilateral fallback if an intent becomes urgent.
+
 Construct the tree from the leaves toward the root. First enumerate candidate outcomes: complete allocations of queued intents to transaction batches or unilateral fallbacks, together with concrete inputs, outputs, change structures, and protocol contingencies. Then derive action sequences that realize those outcomes from the current wallet state. While working upward, merge reverse paths whenever they share the same predecessor action. Equivalently, factor common prefixes of the root-to-leaf action sequences so that shared, less-committal actions appear closer to the root.
 
 ### 1. Seed partitions of the pending-action queue
@@ -51,15 +60,25 @@ In the Radix CoinJoin setting, expand each batch into a decision tree of Radix C
 
 In a net-settlement setting, the residual balance may require only an ordinary self-spend output. That produces a degenerate decision tree with one choice and no decomposition decision.
 
-### 4. Expand leaves into action sequences
+### 4. Extend outcomes with order book coins
+
+Order book coins that would increase the number of counterfactual paths into the wallet's new outputs are especially valuable (see *Max flow based counterfactual path estimation*). Such a coin adds paths as a co-input when it descends from the origins of the wallet's own inputs. However, a co-spend proposal made from the wallet's input that the paths are added to, naming such a coin, links the two, unless such proposals are already common. An outcome may still prefer such a selection, but the cost function should penalize co-spend proposals that leak the link in this way.
+
+### 5. Expand leaves into action sequences
 
 For each surviving outcome, construct one or more sequences of atomic actions that lead from the current wallet state to that leaf. A multiparty batch may require initiating a session, sending co-spend proposals, adding inputs, observing other participants' inputs, and adding outputs. A fallback batch may instead require constructing and broadcasting a unilateral transaction. Attach the estimated duration and information revealed by each edge.
 
 When several leaves share an action, factor that action into a common ancestor. Choose the factoring and edge order to preserve options: given each leaf's bracket, put the least committal and least revealing common actions nearest the root. For example, if one or two coins appear in almost every partition, using them in co-spend proposals can leave more of the generated forest addressable than revealing outputs or committing rarer inputs first.
 
+The coins these outcomes share then guide the structure of the tree, as does each coin's luck, both now and at the next block, since the randomness beacon can be a block hash at some depth below the tip rather than the tip itself. Actions are scheduled least committal first, so the actions shared by the most outcomes end up nearest the root.
+
+Within a batch, inputs are added before outputs, and signatures come last. Inputs named in co-spend proposals are scheduled early, in particular those compatible with the most favorable outcomes. *Auxiliary* inputs, which aren't named in any co-spend proposal, are added using the weight unit credits of these initial inputs. Whether to include them can be decided after observing the other users' initial inputs, i.e. the full list of UTXOs in the coalition formation proposal.
+
+The expected durations of steps can be annotated along each path. This takes the time dependence of the leaves into account, so that actions are scheduled early enough.
+
 Time-dependent payoff curves participate in this construction. An action sequence is admissible only if its cumulative estimated duration leaves every dependent branch rational at the time it would be taken. A branch may end in a unilateral fallback when coalition formation outlives an intent's multiparty window.
 
-### 5. Bracket and back up values
+### 6. Bracket and back up values
 
 Evaluate every leaf under currently available information. A leaf is a pure strategy. The *cost function* chapter scores it as a family of piecewise linear time-dependent curves, one per term, each flagged as privacy-related or not, evaluated at a point and summed. Objective costs, including blockspace, fees, and change, are normally concrete. A leaf's wallet state can itself be valued by imagining a unilateral transaction spending all of its coins right after, and taking that transaction's consolidation penalty and objective costs, as in the *Consolidation* chapter.
 
@@ -73,6 +92,10 @@ Back the leaf values up through each action, shifting successor payoff curves by
 Once the wallet commits an action, prune its incompatible siblings. Every action discards parts of the forest, so early actions that preserve many acceptable descendants are preferred.
 
 ## Re-evaluation
+
+Each path down the tree is a plan, i.e. a pure strategy. Since announcements and co-spend proposals are actions like any other, they are planned as well. New alternatives can be added to the tree, or a whole new tree can be computed from any state and combined with the current one as further alternatives.
+
+Because the tree is potentially large and costly to generate and evaluate, most of it is generated up front. It is then updated as co-spend proposals, coalition formation proposals, and the auxiliary inputs of committed transactions are learned.
 
 The decision loop is specified in the *cost function* chapter. The tree is extended or rebuilt within the available compute budget, and re-evaluated with current brackets and action-duration estimates, whenever the pending-action queue changes or other new information arrives.
 
