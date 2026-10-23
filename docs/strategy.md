@@ -13,7 +13,7 @@ A procedure for constructing the decision tree that the [cost function](cost_fun
 
 The wallet state contains the spendable UTXO set, inflight transactions, current protocol observations and beliefs, policy parameters, and an ordered queue $Q=(q_1,\ldots,q_n)$ of pending actions. An entry may be a PSBT fragment, a lone `TxOut` for an intended payment, or an arbitrary transaction fragment. This procedure calls every such entry an *intent* without assuming that it already defines a complete transaction.
 
-The edges of the tree are the actions listed in the *cost function* chapter, together with constructing, signing, broadcasting, or replacing a unilateral transaction, and deferring or skipping an intent.
+The edges of the tree are the actions listed in the *Optimization framework* chapter, together with constructing, signing, broadcasting, or replacing a unilateral transaction, and deferring or skipping an intent.
 
 Each path must be executable from the current wallet state. Each leaf denotes the resulting wallet state after a mutually exclusive plan, including its remaining queue and unilateral fallbacks.
 
@@ -80,14 +80,14 @@ Time-dependent payoff curves participate in this construction. An action sequenc
 
 ### 6. Bracket and back up values
 
-Evaluate every leaf under currently available information. A leaf is a pure strategy. The *cost function* chapter scores it as a family of piecewise linear time-dependent curves, one per term, each flagged as privacy-related or not, evaluated at a point and summed. Objective costs, including blockspace, fees, and change, are normally concrete. A leaf's wallet state can itself be valued by imagining a unilateral transaction spending all of its coins right after, and taking that transaction's consolidation penalty and objective costs, as in the *Consolidation* chapter.
+Evaluate every leaf under currently available information. A leaf is a pure strategy. The *Optimization framework* chapter scores it as a family of piecewise linear time-dependent curves, one per term, each flagged as privacy-related or not, evaluated at a point and summed. Objective costs, including blockspace, fees, and change, are normally concrete. A leaf's wallet state can itself be valued by imagining a unilateral transaction spending all of its coins right after, and taking that transaction's consolidation penalty and objective costs, as in the *Consolidation* chapter.
 
 Terms that depend on other participants' future input or output choices are bracketed:
 
 - **Worst case:** no other party contributes value, apart from co-spend adjustments in effect.
 - **Best case:** every privacy liability is 0. It's used for pruning.
 
-Back the leaf values up through each action, shifting successor payoff curves by the action's estimated duration, and adding the immediate action cost at each edge. These backups internalize future consequences, so the action at the root isn't myopic. Each parent is valued by its tree level expectation, as in the *cost function* chapter.
+Back the leaf values up through each action, shifting successor payoff curves by the action's estimated duration, and adding the immediate action cost at each edge. These backups internalize future consequences, so the action at the root isn't myopic. Each parent is valued by its tree level expectation, as in the *Optimization framework* chapter.
 
 Once the wallet commits an action, prune its incompatible siblings. Every action discards parts of the forest, so early actions that preserve many acceptable descendants are preferred.
 
@@ -97,6 +97,6 @@ Each path down the tree is a plan, i.e. a pure strategy. Since announcements and
 
 Because the tree is potentially large and costly to generate and evaluate, most of it is generated up front. It is then updated as co-spend proposals, coalition formation proposals, and the auxiliary inputs of committed transactions are learned.
 
-The decision loop is specified in the *cost function* chapter. The tree is extended or rebuilt within the available compute budget, and re-evaluated with current brackets and action-duration estimates, whenever the pending-action queue changes or other new information arrives.
+The decision loop is specified in the *Optimization framework* chapter. The tree is extended or rebuilt within the available compute budget, and re-evaluated with current brackets and action-duration estimates, whenever the pending-action queue changes or other new information arrives.
 
 Relevant events include new co-spend proposals, changes to randomization terms during coalition formation, fee or time updates, and observing additional inputs before committing to particular output choices. Event-driven re-evaluation allows the wallet to exploit new information without requiring exhaustive precomputation of the partition lattice.
