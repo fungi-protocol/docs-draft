@@ -1,6 +1,8 @@
 [default.extend-identifiers]
 # Author of The Byzantine Generals Problem.
 Pease = "Pease"
+# Author of Asymmetric Distributed Trust.
+Cachin = "Cachin"
 # Single-use reply blocks.
 SURB = "SURB"
 SURBs = "SURBs"

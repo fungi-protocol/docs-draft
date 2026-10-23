@@ -50,6 +50,8 @@ With some well-defined way to transmit messages from one peer to another, we can
 
 In order to realize peer-to-peer channels, any transport that provides authentication, integrity and confidentiality may be used. This allows peers to send messages to each other directly, for initiating as well as carrying out transaction construction.
 
+The [channel interfaces](channels.md) separate peer and broadcast addressing from transport interactivity, delivery and privacy. Bidirectional communication can use a live Tor stream, paired store-and-forward mailboxes or message delivery with anonymous reply capabilities. Each mechanism has different availability and lifetime requirements even when it presents the same send and receive operations.
+
 Group communication can be built out of peer-to-peer channels; this is known as gossip or rumor-spreading. Alternatively, a specialized broadcast channel implementation can be used. So long as each peer eventually receives all messages sent by every other peer, they will converge on the same transaction fragments, and combine them in the same way to obtain a consistent view of the unsigned transaction.
 
 The honest setting accommodates geographically separated co-signers within a multisig wallet, coordination between separately managed funds within an organization, collaborative batching, and interactive payments. Before signing, every participant checks this transaction, ensuring their funds end up in the destinations they intended. Although the model assumes no malicious edits to the transaction, performing these checks is what enforces safety. Doing this ensures that if the assumption does not hold, the system still fails closed, and any faults that aren't explicitly accounted for in the model will only lead to denial of service, not loss of funds. Needless to say, this check also applies to the more adversarial settings described below.
@@ -196,6 +198,8 @@ Going further, a trusted execution environment (TEE) can shift trust assumptions
 
 The reason such an additional trust assumption may be desired in some circumstances is that it improves liveness and consistency under weaker quorum assumptions, while reducing clients’ validation work further. This does not relax the requirement for unanimous transaction signing, nor is the TEE trusted with protecting privacy; private allocations and spending authority remain with the participants and their messages must remain unlinkable. This provides an alternative path to liveness when clients are too constrained for scalable Byzantine fault tolerance, or when the conditions for Byzantine fault tolerance don't hold (for example a dishonest majority of validators).
 
+Peers need not make identical trust assumptions: one may accept a vendor's attestations while another validates independently. This is related to asymmetric distributed trust, which models each participant's assumptions about which combinations of peers may fail.[^asymmetric-trust] Flexible BFT provides a complementary precedent for interpreting a shared protocol transcript under different fault and timing assumptions.[^flexible-bft] These are relevant frameworks rather than proofs of this TEE construction; its guarantees depend on the chosen acceptance rules and trust assumptions.
+
 In other words, using essentially the same unmodified block DAG structure we can accommodate multiple communication models and trust assumptions, to accommodate a variety of client capabilities and circumstances.
 
 ## Coalition formation
@@ -229,6 +233,12 @@ Coalition formation proposals bundle together a collection of co-spend proposals
 [^dag-rider]: I. Keidar, E. Kokoris-Kogias, O. Naor and A. Spiegelman, [*All You Need is DAG*](https://arxiv.org/abs/2102.08325) (2021). DAG-Rider separates construction of a communication DAG from local ordering of its proposals.
 
 [^trusted-coordinators]: Y. Kogman, [*Reiterating centralized coinjoin (Wasabi & Samourai) deanonymization attacks*](https://groups.google.com/g/bitcoindev/c/CbfbEGozG7c/m/w2B-RRdUCQAJ)
+
+<!-- cspell:words Alpos Cachin Malkhi Nayak Tackmann Zanolini -->
+
+[^asymmetric-trust]: O. Alpos, C. Cachin, B. Tackmann and L. Zanolini, [*Asymmetric Distributed Trust*](https://arxiv.org/abs/1906.09314) (2024). Subjective fault assumptions and asymmetric Byzantine quorum systems.
+
+[^flexible-bft]: D. Malkhi, K. Nayak and L. Ren, [*Flexible Byzantine Fault Tolerance*](https://arxiv.org/abs/1904.10067) (2019). Different clients interpret one protocol transcript using different fault and timing assumptions.
 
 [^coinswap]: For example [CoinSwap](https://openswap.live/) is such a protocol which relies on atomic swap contracts, designed with privacy in mind.
 
