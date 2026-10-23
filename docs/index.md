@@ -12,6 +12,7 @@ okf_version: "0.2"
 * [🤖 Peer set reconciliation](set-reconciliation.md) - Naive reconciliation, quiescence before block authoring, sparse Merkle sets, mutual knowledge, and range reconciliation and rateless streams as future optimizations.
 * [🤖 Contacts, devices and discovery](contacts.md) - Introduction, TOFU, trust policy, revocation, application interoperability across transports, contact channels and payment negotiation.
 * [Market-based coalition formation](coalition_formation.md) - Under review in #18.
+* [🤖 Transaction construction](transaction-construction.md) - Content and state synchronization, the phases, the optimistic and recovery tracks, and the block DAG they share.
 
 # Privacy Optimization Strategy
 

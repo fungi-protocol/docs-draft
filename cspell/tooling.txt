@@ -9,6 +9,7 @@ fontconfig
 Graphviz
 KaTeX
 lzanini
+mathrm
 mdBook
 mmdc
 NixOS
