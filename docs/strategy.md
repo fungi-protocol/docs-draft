@@ -87,7 +87,7 @@ Terms that depend on other participants' future input or output choices are brac
 - **Worst case:** no other party contributes value, apart from co-spend adjustments in effect.
 - **Best case:** every privacy liability is 0. It's used for pruning.
 
-Back the leaf values up through each action, shifting successor payoff curves by the action's estimated duration, and adding the immediate action cost at each edge. These backups internalize future consequences, so the action at the root isn't myopic. The wallet plays a mixed strategy, uniform among the $k$ best leaves. A parent's value is a tree level expectation: the mean of the worst cases of the $k$ least worst leaves below it. This internalizes the optionality of the leaves into their parent.
+Back the leaf values up through each action, shifting successor payoff curves by the action's estimated duration, and adding the immediate action cost at each edge. These backups internalize future consequences, so the action at the root isn't myopic. Each parent is valued by its tree level expectation, as in the *cost function* chapter.
 
 Once the wallet commits an action, prune its incompatible siblings. Every action discards parts of the forest, so early actions that preserve many acceptable descendants are preferred.
 
