@@ -1,11 +1,11 @@
 ---
 type: concept
-title: Concrete cost function
+title: Pure Strategy Evaluation
 status: draft
 stale_after: 2026-11-06T00:00:00Z
 ---
 
-# Concrete cost function
+# Pure Strategy Evaluation
 
 🤖 The concrete terms of the [cost function](optimization_framework.md). Each term is specified in its own chapter. This one summarizes them.
 
