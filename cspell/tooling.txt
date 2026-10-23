@@ -1,13 +1,19 @@
 # Repository tools, identifiers, and upstream authors
+ambs
+atmd
 cacheprovider
+capsys
 DejaVu
 devshell
 DNSSEC
 dontInstall
 dylanowen
+encs
 fontconfig
 Graphviz
+ipynb
 KaTeX
+linkpred
 lzanini
 mathit
 mathrm
@@ -21,4 +27,5 @@ PyYAML
 stdenv
 texttt
 toplevel
+txni
 unfetched
