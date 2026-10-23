@@ -7,7 +7,7 @@ stale_after: 2026-11-06T00:00:00Z
 
 # Strategy
 
-A procedure for constructing the decision tree that the [cost function](cost_function_abstract.md) evaluates, using the terms in the *Concrete cost function* chapter. The input is the current wallet state. The output is a tree whose edges are actions and whose nodes are successor wallet states.
+A procedure for constructing the decision tree that the [cost function](optimization_framework.md) evaluates, using the terms in the *Concrete cost function* chapter. The input is the current wallet state. The output is a tree whose edges are actions and whose nodes are successor wallet states.
 
 ## Inputs and output
 

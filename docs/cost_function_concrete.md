@@ -7,7 +7,7 @@ stale_after: 2026-11-06T00:00:00Z
 
 # Concrete cost function
 
-The concrete terms of the [cost function](cost_function_abstract.md). Each term is specified in its own chapter. This one summarizes them.
+The concrete terms of the [cost function](optimization_framework.md). Each term is specified in its own chapter. This one summarizes them.
 
 ## Terms
 
