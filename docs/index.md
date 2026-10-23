@@ -12,7 +12,7 @@ okf_version: "0.2"
 
 * [Cost function framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
 * [Concrete cost function](cost_function_concrete.md) - The concrete terms of the cost function, and how each behaves in the decision tree.
-* [Decision tree construction](decision_tree_construction.md) - A procedure for constructing the decision tree the cost function evaluates, and when to re-evaluate it.
+* [Strategy](strategy.md) - A procedure for constructing the decision tree the cost function evaluates, and when to re-evaluate it.
 
 # BIP Drafts
 

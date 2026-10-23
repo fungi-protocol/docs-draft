@@ -1,11 +1,11 @@
 ---
 type: concept
-title: Decision tree construction
+title: Strategy
 status: draft
 stale_after: 2026-11-06T00:00:00Z
 ---
 
-# Decision tree construction
+# Strategy
 
 A procedure for constructing the decision tree that the [cost function](cost_function_abstract.md) evaluates, using the terms in the *Concrete cost function* chapter. The input is the current wallet state. The output is a tree whose edges are actions and whose nodes are successor wallet states.
 
