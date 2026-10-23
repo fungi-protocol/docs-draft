@@ -12,7 +12,7 @@ okf_version: "0.2"
 
 * [Cost function framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
 * [Randomized selection and Sybil resistance](cost_function_randomized_selection.md) - Selection preferences that randomize which coins are co-spent, a Sybil resistance index measuring their effect, and a provenance term valuing coins by it.
-* [Sybil resistance index](sybil_resistance_index.md) - A conservative lower bound on the number of candidate coins a transaction's inputs were selected from, and how to find the block hash they were selected with.
+* [🤖 Sybil resistance index](sybil_resistance_index.md) - A conservative lower bound on the number of candidate coins a transaction's inputs were selected from, and how to find the block hash they were selected with.
 
 # BIP Drafts
 

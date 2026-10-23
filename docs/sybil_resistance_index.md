@@ -5,7 +5,7 @@ status: draft
 stale_after: 2026-11-06T00:00:00Z
 ---
 
-# Sybil resistance index
+# 🤖 Sybil resistance index
 
 A conservative lower bound $L$ on the number of candidate coins a transaction's inputs were selected from. It measures the effect of the selection preferences in the [randomized selection](cost_function_randomized_selection.md) chapter, whose provenance term uses it.
 

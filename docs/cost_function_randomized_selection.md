@@ -71,7 +71,7 @@ The term rises with this cost: an inherited "luck" from previously lucky coins, 
 
 See also Belcher's analysis of fidelity bonds.[^belcher]
 
-### Joint sums
+### 🤖 Joint sums {#joint-sums}
 
 For the $n$ input hashes of the funding transaction and a confidence parameter $\delta$:
 
@@ -99,7 +99,7 @@ Joint sums are used because they are:
 
 The [Sybil resistance index](sybil_resistance_index.md) chapter gives the proofs, the scan over block hashes, and measurements.
 
-## In the decision tree
+## 🤖 In the decision tree {#in-the-decision-tree}
 
 - **Per input and pairwise terms** change during coalition formation, as candidates appear.
 - **Provenance term** of a coin under consideration is fixed once its funding transaction confirms, so it's computed once per coin and cached.
@@ -108,10 +108,11 @@ The [Sybil resistance index](sybil_resistance_index.md) chapter gives the proofs
 
 This is the analysis that contributes privacy gains, and that uses the budget.
 
-- All inputs are known, but $t$ isn't. It can be guessed from the confirmation time, or the nLockTime. $L$ is the maximum over the candidate block hashes mined after the inputs confirmed, each at $\delta / W$ for $W$ candidates. See [Finding the block hash](sybil_resistance_index.md#finding-the-block-hash).
-- The provenance term of the transaction's outputs is then fixed.
+- All inputs are known, but $t$ isn't. It can be guessed from the confirmation time, or the nLockTime.
+- 🤖 $L$ is the maximum over the candidate block hashes mined after the inputs confirmed, each at $\delta / W$ for $W$ candidates. See [Finding the block hash](sybil_resistance_index.md#finding-the-block-hash).
+- 🤖 The provenance term of the transaction's outputs is then fixed.
 
-## Open questions
+## 🤖 Open questions {#open-questions}
 
 - What should $\delta$ be?
 - How are the minimum cost and the predicted maximum computed from $L$?
