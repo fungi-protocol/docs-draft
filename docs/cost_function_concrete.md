@@ -7,13 +7,13 @@ stale_after: 2026-11-06T00:00:00Z
 
 # Concrete cost function
 
-The concrete terms of the [cost function](optimization_framework.md). Each term is specified in its own chapter. This one summarizes them.
+🤖 The concrete terms of the [cost function](optimization_framework.md). Each term is specified in its own chapter. This one summarizes them.
 
 ## Terms
 
-Objective costs, such as fees and blockspace, are concrete. The terms below are privacy liabilities and preferences.
+🤖 Objective costs, such as fees and blockspace, are concrete. The terms below are privacy liabilities and preferences.
 
-### Subset sum ambiguity
+### 🤖 Subset sum ambiguity {#subset-sum-ambiguity}
 
 A liability $0 \le \ell(o) \le 1$ for each output $o$ of a proposed decomposition.
 
@@ -23,7 +23,7 @@ A liability $0 \le \ell(o) \le 1$ for each output $o$ of a proposed decompositio
 
 See the *Subset sum ambiguity* chapter, and the *Subset sum density* chapter for how density is estimated and optimized.
 
-### Max flow based counterfactual path estimation
+### 🤖 Max flow based counterfactual path estimation {#max-flow-based-counterfactual-path-estimation}
 
 Disjoint flows: the number of counterfactual routes $\lfloor F / d \rfloor$ from a source coin to a set of sink coins.
 
@@ -35,18 +35,20 @@ See the *Max flow based counterfactual path estimation* chapter.
 
 ### Consolidation
 
-Spending own coins together links them, and loss from intersection attacks compounds with each one.
+🤖 Spending own coins together links them, and loss from intersection attacks compounds with each one.
 
-- $\ell_c = (b^{\nu_0} - 1) \cdot (1 - p q)$, where $\nu_0$ is the number of inputs less one, and:
+- 🤖 $\ell_c = (b^{\nu_0} - 1) \cdot (1 - p q)$, where $\nu_0$ is the number of inputs less one, and:
   - $q = 1 - \nu / \nu_0$ measures the routes, where $\nu$ sums $1 - \iota$ over the inputs, less the largest one;
   - $p$ measures the density of their subset sums.
 - Normally the penalty can be larger than the budget, to avoid actions vulnerable to intersection attacks.
-- Routes and density each relieve it only in proportion to the other. With subset sums dense enough that the inputs can't easily be clustered, and with counterfactual routes, consolidation is tolerated freely: $\ell_c = 0$ once the density reaches its threshold and every input but one is impervious. Density alone isn't enough, because comparing the ancestor sets of pairs of inputs narrows down an intersection attack efficiently, even in a large transaction.
+- 🤖 Routes and density each relieve it only in proportion to the other.
+- With subset sums dense enough that the inputs can't easily be clustered, and with counterfactual routes, consolidation is tolerated freely.
+- 🤖 $\ell_c = 0$ once the density reaches its threshold and every input but one is impervious. Density alone isn't enough, because comparing the ancestor sets of pairs of inputs narrows down an intersection attack efficiently, even in a large transaction.
 - So the cost function compels a strategy. First CoinJoin with low fan-in while the subset sums on the inputs are dense. Once the counterfactual routes are built and the funds are well absorbed into the CoinJoin graph, consolidate their descendants, subject to the counterfactual superconcentrator condition: $K$ routes over the other users' edges only, from the earliest ancestor coins to the inputs under consideration.
 
-See the *Consolidation* chapter.
+🤖 See the *Consolidation* chapter.
 
-### Randomization
+### 🤖 Randomization {#randomization}
 
 Two weak preferences, defined only on outpoints. $t$ is a block hash, used as a public randomness beacon, and $x_i = H(t, i)$ for each input outpoint $i$. Each preference is worth less than 1 sat, so it only breaks ties.
 
@@ -55,7 +57,7 @@ Two weak preferences, defined only on outpoints. $t$ is a block hash, used as a 
 
 Both are summed over the transaction's inputs, through a monotone scaling function. They bias co-spending through market choices. See the *Randomized selection and Sybil resistance* chapter.
 
-### Sybil resistance
+### 🤖 Sybil resistance {#sybil-resistance}
 
 The provenance term estimates the size of the order book at the time of a coin's funding transaction, from that transaction's input set. So it can be seen as a multiplier for the liquidity (coindays) and the transaction cost (fees) of the observed transaction. A discount rate reduces them to one cost. It can be repeated for ancestors, subject to data availability and computational limits.
 
@@ -87,7 +89,7 @@ Joint sums are used because the estimate:
 
 See the *Randomized selection and Sybil resistance* chapter for the terms, and the *Sybil resistance index* chapter for the proofs and measurements.
 
-### Sibling avoidance
+### 🤖 Sibling avoidance {#sibling-avoidance}
 
 Spending outputs of the same transaction together is penalized heavily.
 
@@ -96,7 +98,7 @@ Spending outputs of the same transaction together is penalized heavily.
 
 See the *Siblings* chapter.
 
-### UTXO pool diversity
+### 🤖 UTXO pool diversity {#utxo-pool-diversity}
 
 A wallet also values the diversity of its own UTXO pool:
 
@@ -106,11 +108,11 @@ A wallet also values the diversity of its own UTXO pool:
 
 How to represent this mathematically is an open question.
 
-### Other ad hoc terms
+### 🤖 Other ad hoc terms {#other-ad-hoc-terms}
 
 Other ad hoc terms, such as fingerprint avoidance, are yet to be specified.
 
-### In the decision tree
+### 🤖 In the decision tree {#in-the-decision-tree}
 
 - **Subset sum ambiguity** can only fall as other users' inputs and outputs are learned. This gives the best and worst cases in [step 6 of *Tactics*](tactics.md#6-bracket-and-back-up-values).
 - **Labels** $\iota$, and the routes matrix entries for confirmed inputs, are fixed once a coin confirms, so they're cached per coin. Nothing other users add changes them.
