@@ -12,7 +12,7 @@ okf_version: "0.2"
 
 * [Cost function framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
 * [🤖 Pure Strategy Evaluation](pure_strategy_evaluation.md) - How the cost of a pure strategy is evaluated: the structure of the cost function, and its privacy liability terms.
-* [Pure Strategy Evaluation](cost_function_concrete.md) - The concrete terms of the cost function, and how each behaves in the decision tree.
+* [Privacy liability terms](cost_function_concrete.md) - The concrete terms of the cost function, and how each behaves in the decision tree.
 * [Tactics](tactics.md) - Generating the decision tree bottom up, with coin selection and change decomposition, and when to re-evaluate it.
 
 # BIP Drafts

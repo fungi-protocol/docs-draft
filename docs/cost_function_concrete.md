@@ -1,11 +1,11 @@
 ---
 type: concept
-title: Pure Strategy Evaluation
+title: Privacy liability terms
 status: draft
 stale_after: 2026-11-06T00:00:00Z
 ---
 
-# Pure Strategy Evaluation
+# Privacy liability terms
 
 🤖 The concrete terms of the [cost function](optimization_framework.md). Each term is specified in its own chapter. This one summarizes them.
 
