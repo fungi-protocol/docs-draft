@@ -11,6 +11,7 @@ okf_version: "0.2"
 # Privacy Optimization Strategy
 
 * [Optimization framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
+* [🤖 Cost function structure](cost_function_structure.md) - The structure shared by the family of cost functions that evaluate pure strategies: time dependence, linear combination of terms and bracketing.
 * [🤖 Mixed strategy](mixed_strategy.md) - How to compose a mixed strategy from the cost of pure strategies: randomization, time dependence, internalization and the decision loop.
 
 # BIP Drafts
