@@ -7,7 +7,7 @@ stale_after: 2026-11-06T00:00:00Z
 
 # Concrete cost function
 
-The concrete terms of the [cost function](cost_function_abstract.md), and a procedure for constructing the decision tree it evaluates. Each term is specified in its own chapter. This one summarizes them.
+The concrete terms of the [cost function](cost_function_abstract.md). Each term is specified in its own chapter. This one summarizes them.
 
 ## Terms
 
@@ -112,81 +112,8 @@ Other ad hoc terms, such as fingerprint avoidance, are yet to be specified.
 
 ### In the decision tree
 
-- **Subset sum ambiguity** can only fall as other users' inputs and outputs are learned. This gives the best and worst cases in [step 5](#5-bracket-and-back-up-values).
+- **Subset sum ambiguity** can only fall as other users' inputs and outputs are learned. This gives the best and worst cases in [step 5 of decision tree construction](decision_tree_construction.md#5-bracket-and-back-up-values).
 - **Labels** $\iota$, and the routes matrix entries for confirmed inputs, are fixed once a coin confirms, so they're cached per coin. Nothing other users add changes them.
 - **Siblings and consolidation** are fixed when the inputs are chosen, except that $\ell_c$ can only fall as density rises.
 - **Best cases** of the privacy liabilities are 0, used for pruning.
-- **Randomization** changes during coalition formation, as candidates appear. The provenance term is fixed once a coin's funding transaction confirms. Both are events that trigger [re-evaluation](#re-evaluation).
-
-## Decision tree
-
-The rest of this chapter gives a procedure for constructing the decision tree. The input is the current wallet state. The output is a tree whose edges are actions and whose nodes are successor wallet states.
-
-### Inputs and output
-
-The wallet state contains the spendable UTXO set, inflight transactions, current protocol observations and beliefs, policy parameters, and an ordered queue $Q=(q_1,\ldots,q_n)$ of pending actions. An entry may be a PSBT fragment, a lone `TxOut` for an intended payment, or an arbitrary transaction fragment. This procedure calls every such entry an *intent* without assuming that it already defines a complete transaction.
-
-The edges of the tree are the actions listed in the *cost function* chapter, together with constructing, signing, broadcasting, or replacing a unilateral transaction, and deferring or skipping an intent.
-
-Each path must be executable from the current wallet state. Each leaf denotes the resulting wallet state after a mutually exclusive plan, including its remaining queue and unilateral fallbacks.
-
-### Bottom-up construction
-
-Construct the tree from the leaves toward the root. First enumerate candidate outcomes: complete allocations of queued intents to transaction batches or unilateral fallbacks, together with concrete inputs, outputs, change structures, and protocol contingencies. Then derive action sequences that realize those outcomes from the current wallet state. While working upward, merge reverse paths whenever they share the same predecessor action. Equivalently, factor common prefixes of the root-to-leaf action sequences so that shared, less-committal actions appear closer to the root.
-
-#### 1. Seed partitions of the pending-action queue
-
-A partition $\pi$ of $Q$ groups intents that the wallet plans to realize together. Each part is one batch; distinct parts are separate transactions or sessions. The partition-refinement order captures every way the same intents may be realized together or separately. Its bottom element is the discrete partition of singleton batches, and its top element is the indiscrete partition containing the entire queue in one batch.
-
-Time-dependent payoff curves constrain this lattice. If an intent is elapsing and its expected multiparty delay would make it irrational, move it to an executable unilateral fallback or skip it. The residue remains eligible for batching. This avoids the false dichotomy between doing the whole queue unilaterally and putting the whole queue into one multiparty transaction: one leaf may contain several multiparty batches, several unilateral actions, and deferred intents.
-
-Seed candidate partitions as follows:
-
-1. Always add the bottom and top elements after applying feasibility and time filters.
-2. If $n$ is small enough, add the whole partition-refinement lattice. The number of partitions is the Bell number $B_n$, so exhaustive enumeration is reserved for small queues.
-3. Otherwise, seed at least one maximal path from bottom to top. Starting at the bottom, repeatedly merge the pair of parts with the greatest priority according to objective cost reduction, coin-selection feasibility, and time constraints. Never backtrack along this path. Its $n$ partitions provide $O(n)$ partition seeds and a linear-space baseline for this stage. Later coin-selection and change alternatives may expand each seed into several outcomes and leaves.
-4. Prefer several paths when resources allow. Vary priority order or retain several near-best merges at selected levels so the seed is a tree rather than only a list.
-5. Spend remaining precomputation budget on additional partitions. Simulated annealing, randomized merge and split moves, beam search, or another combinatorial search may sample the omitted lattice. During a live protocol session, repeat this search with newly revealed information and score the sampled partitions directly.
-
-#### 2. Allocate coin selections within each partition
-
-For every seeded partition, allocate inputs jointly across all of its batches. A simple implementation processes the batches successively with an ordinary coin-selection algorithm while removing each selected UTXO from the set available to later batches. The order is part of the candidate. No UTXO may appear in two batches of the same partition.
-
-Repeat allocation with different batch orders, coin-selection randomization, or near-optimal solutions so that each batch can have several candidate coin selections. Reject an allocation unless every batch is balanced: its selected input value must exceed the effective cost of its intended outputs and other mandatory transaction fields.
-
-Positive balance establishes feasibility, not rationality. Before expanding an allocation, reject any batch whose excess implies an unreasonable feerate or whose objective cost can never be offset by its payoff curve. Also reject any choice that the internalized privacy model marks as prohibited, encoded as an infinite privacy liability: by construction such a choice is never rational, regardless of nominal fee savings. Finite privacy harms remain priced terms in the wallet-state valuation and may trade off against other costs.
-
-#### 3. Recover surplus with change construction
-
-Coin selection generally leaves a positive balance that would otherwise be overpaid in fees. Change construction recovers that value and therefore minimizes the batch's objective cost.
-
-In the Radix CoinJoin setting, expand each batch into a decision tree of Radix CoinJoin decompositions. Keep at least $k$ acceptable decompositions selected uniformly at random when at least $k$ exist. A partial decomposition may also be retained when later information is needed to finish it.
-
-In a net-settlement setting, the residual balance may require only an ordinary self-spend output. That produces a degenerate decision tree with one choice and no decomposition decision.
-
-#### 4. Expand leaves into action sequences
-
-For each surviving outcome, construct one or more sequences of atomic actions that lead from the current wallet state to that leaf. A multiparty batch may require initiating a session, sending co-spend proposals, adding inputs, observing other participants' inputs, and adding outputs. A fallback batch may instead require constructing and broadcasting a unilateral transaction. Attach the estimated duration and information revealed by each edge.
-
-When several leaves share an action, factor that action into a common ancestor. Choose the factoring and edge order to preserve options: given each leaf's bracket, put the least committal and least revealing common actions nearest the root. For example, if one or two coins appear in almost every partition, using them in co-spend proposals can leave more of the generated forest addressable than revealing outputs or committing rarer inputs first.
-
-Time-dependent payoff curves participate in this construction. An action sequence is admissible only if its cumulative estimated duration leaves every dependent branch rational at the time it would be taken. A branch may end in a unilateral fallback when coalition formation outlives an intent's multiparty window.
-
-#### 5. Bracket and back up values
-
-Evaluate every leaf under currently available information. A leaf is a pure strategy. The *cost function* chapter scores it as a family of piecewise linear time-dependent curves, one per term, each flagged as privacy-related or not, evaluated at a point and summed. Objective costs, including blockspace, fees, and change, are normally concrete. A leaf's wallet state can itself be valued by imagining a unilateral transaction spending all of its coins right after, and taking that transaction's consolidation penalty and objective costs, as in the *Consolidation* chapter.
-
-Terms that depend on other participants' future input or output choices are bracketed:
-
-- **Worst case:** no other party contributes value, apart from co-spend adjustments in effect.
-- **Best case:** every privacy liability is 0. It's used for pruning.
-
-Back the leaf values up through each action, shifting successor payoff curves by the action's estimated duration, and adding the immediate action cost at each edge. These backups internalize future consequences, so the action at the root isn't myopic. The wallet plays a mixed strategy, uniform among the $k$ best leaves. A parent's value is a tree level expectation: the mean of the worst cases of the $k$ least worst leaves below it. This internalizes the optionality of the leaves into their parent.
-
-Once the wallet commits an action, prune its incompatible siblings. Every action discards parts of the forest, so early actions that preserve many acceptable descendants are preferred.
-
-### Re-evaluation
-
-The decision loop is specified in the *cost function* chapter. The tree is extended or rebuilt within the available compute budget, and re-evaluated with current brackets and action-duration estimates, whenever the pending-action queue changes or other new information arrives.
-
-Relevant events include new co-spend proposals, changes to randomization terms during coalition formation, fee or time updates, and observing additional inputs before committing to particular output choices. Event-driven re-evaluation allows the wallet to exploit new information without requiring exhaustive precomputation of the partition lattice.
+- **Randomization** changes during coalition formation, as candidates appear. The provenance term is fixed once a coin's funding transaction confirms. Both are events that trigger [re-evaluation](decision_tree_construction.md#re-evaluation).
