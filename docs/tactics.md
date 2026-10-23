@@ -97,6 +97,6 @@ Each path down the tree is a plan, i.e. a pure strategy. Since announcements and
 
 Because the tree is potentially large and costly to generate and evaluate, most of it is generated up front. It is then updated as co-spend proposals, coalition formation proposals, and the auxiliary inputs of committed transactions are learned.
 
-The decision loop is specified in the *Optimization framework* chapter. The tree is extended or rebuilt within the available compute budget, and re-evaluated with current brackets and action-duration estimates, whenever the pending-action queue changes or other new information arrives.
+The decision loop is specified in the *Mixed strategy* chapter. The tree is extended or rebuilt within the available compute budget, and re-evaluated with current brackets and action-duration estimates, whenever the pending-action queue changes or other new information arrives.
 
 Relevant events include new co-spend proposals, changes to randomization terms during coalition formation, fee or time updates, and observing additional inputs before committing to particular output choices. Event-driven re-evaluation allows the wallet to exploit new information without requiring exhaustive precomputation of the partition lattice.
