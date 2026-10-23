@@ -1,10 +1,15 @@
 # Author names
 Alpern
+Deligios
 Dolev
 Dwork
 Elkind
+Eurocrypt
+Falbesoner
 Garay
+josibake
 Keidar
+Klasovita
 Kleppmann
 Kogias
 Kogman
@@ -13,6 +18,7 @@ Naor
 Paverd
 Poupko
 Skoumios
+Somsen
 Stockmeyer
 Wuille
 Zikas

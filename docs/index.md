@@ -14,6 +14,7 @@ okf_version: "0.2"
 * [Market-based coalition formation](coalition_formation.md) - Under review in #18.
 * [🤖 Transaction construction](transaction-construction.md) - Content and state synchronization, the phases, the optimistic and recovery tracks, and the block DAG they share.
   * [🤖 Optimistic track: blocks and phase states](optimistic-track.md) - Unanimity and phase closure on the optimistic track, phase by phase.
+  * [🤖 Recovery track](recovery-track.md) - How a stalled phase of the optimistic track turns into a recovery coalition formation proposal. Draft.
 
 # Privacy Optimization Strategy
 
