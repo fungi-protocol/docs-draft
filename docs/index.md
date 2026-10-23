@@ -11,7 +11,7 @@ okf_version: "0.2"
 # Privacy Optimization Strategy
 
 * [Optimization framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
-* [Mixed strategy](mixed_strategy.md) - How to compose a mixed strategy from the cost of pure strategies: randomization, time dependence, internalization and the greedy decision loop.
+* [🤖 Mixed strategy](mixed_strategy.md) - How to compose a mixed strategy from the cost of pure strategies: randomization, time dependence, internalization and the greedy decision loop.
 
 # BIP Drafts
 
