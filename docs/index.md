@@ -10,7 +10,7 @@ okf_version: "0.2"
 
 # Privacy Optimization Strategy
 
-* [Cost function framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
+* [Optimization framework for Bitcoin wallets](optimization_framework.md) - Under review in #15.
 
 # BIP Drafts
 
