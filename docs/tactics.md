@@ -82,7 +82,7 @@ The expected durations of steps can be annotated along each path. This takes the
 
 ### 🤖 6. Bracket and back up values {#6-bracket-and-back-up-values}
 
-Evaluate every leaf under currently available information. A leaf is a pure strategy. The *Optimization framework* chapter scores it as a family of piecewise linear time-dependent curves, one per term, each flagged as privacy-related or not, evaluated at a point and summed. Objective costs, including blockspace, fees, and change, are normally concrete. A leaf's wallet state can itself be valued by imagining a unilateral transaction spending all of its coins right after, and taking that transaction's consolidation penalty and objective costs, as in the *Consolidation* chapter.
+Evaluate every leaf under currently available information. A leaf is a pure strategy. The *Optimization framework* chapter scores it as a family of piecewise linear time-dependent curves, one per term, each flagged as privacy-related or not, evaluated at a point and summed. Objective costs, including blockspace, fees, and change, are normally concrete. A leaf's wallet state can itself be valued by imagining a unilateral transaction spending all of its coins right after, and taking that transaction's consolidation penalty and objective costs, as in the *Consolidation penalty* chapter.
 
 Terms that depend on other participants' future input or output choices are bracketed:
 

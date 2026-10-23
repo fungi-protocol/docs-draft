@@ -21,7 +21,7 @@ A liability $0 \le \ell(o) \le 1$ for each output $o$ of a proposed decompositio
 - The denser these subset sums, the more explanations, and the lower $\ell(o)$.
 - Counting stops once there are enough explanations, and $\ell(o)$ only falls as inputs and outputs are learned.
 
-See the *Subset sum ambiguity* chapter, and the *Subset sum density* chapter for how density is estimated and optimized.
+See the *Own inputs or outputs subset sum ambiguity* chapter, and the *Others' inputs subset sum density* chapter for how density is estimated and optimized.
 
 ### 🤖 Max flow based counterfactual path estimation {#max-flow-based-counterfactual-path-estimation}
 
@@ -46,7 +46,7 @@ See the *Max flow based counterfactual path estimation* chapter.
 - 🤖 $\ell_c = 0$ once the density reaches its threshold and every input but one is impervious. Density alone isn't enough, because comparing the ancestor sets of pairs of inputs narrows down an intersection attack efficiently, even in a large transaction.
 - So the cost function compels a strategy. First CoinJoin with low fan-in while the subset sums on the inputs are dense. Once the counterfactual routes are built and the funds are well absorbed into the CoinJoin graph, consolidate their descendants, subject to the counterfactual superconcentrator condition: $K$ routes over the other users' edges only, from the earliest ancestor coins to the inputs under consideration.
 
-🤖 See the *Consolidation* chapter.
+🤖 See the *Consolidation penalty* chapter.
 
 ### 🤖 Randomization {#randomization}
 
@@ -96,7 +96,7 @@ Spending outputs of the same transaction together is penalized heavily.
 - $\ell_s = \sigma \sum_T \max(0, j_T - 1)$, where $j_T$ is the number of inputs created by transaction $T$, and $\sigma$ is large.
 - Neither $\iota$ nor density reduces it.
 
-See the *Siblings* chapter.
+See the *Sibling output penalty* chapter.
 
 ### 🤖 UTXO pool diversity {#utxo-pool-diversity}
 
